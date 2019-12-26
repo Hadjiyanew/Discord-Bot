@@ -1,0 +1,62 @@
+client.on('guildMemberAdd', member => {
+    let channel = member.guild.channels.find('name', 'join');
+    let memberavatar = member.user.avatarURL
+        if (!channel) return;
+        let embed = new Discord.RichEmbed()
+        .setColor('RANDOM')
+        .setThumbnail(memberavatar)
+        .addField(':bust_in_silhouette: | name : ', `${member}`)
+        .addField(':microphone2: | Welcome!', `Welcome to the server, ${member}`)
+        .addField(':id: | User :', "**[" + `${member.id}` + "]**")
+        .addField(':family_mwgb: | Your are the member', `${member.guild.memberCount}`)
+        .addField("Name", `<@` + `${member.id}` + `>`, true)
+        .setFooter(`${member.guild.name} @ All rights reserved`)
+        .setTimestamp()
+  
+        channel.sendEmbed(embed);
+  });
+  
+  client.on('guildMemberAdd', member => {
+    console.log(`${member}`, "has joined" + `${member.guild.name}`)
+  });
+  
+  client.on('guildMemberRemove', member => {
+    let channel = member.guild.channels.find('name', 'leave');
+    let memberavatar = member.user.avatarURL
+        if (!channel) return;
+        let embed = new Discord.RichEmbed()
+        .setColor('RANDOM')
+        .setThumbnail(memberavatar)
+        .addField('Name:', `${member}`)
+        .addField('Has Let the Server', ';(')
+        .addField('Bye Bye :(', 'We will all miss you!')
+        .addField('Total members', `${member.guild.memberCount}` + " members")
+        .setFooter(`**${member.guild.name}`)
+        .setTimestamp()
+  
+        channel.sendEmbed(embed);
+  });
+  
+  client.on('guildMemberRemove', member => {
+    console.log(`${member}` + "has left" + `${member.guild.name}` + "Sending leave message now")
+    console.log("Leave Message Sent")
+  });
+  
+  client.on("ready", () => {
+    console.log(`\nBot has been ONLINE!\n>> Prefix: ${prefix}\n>> Servers: ${client.guilds.size}\n>> Founder: WeepzBG\n`)
+    client.user.setActivity(`Listening to MurelianINC | w!help`);
+  });
+  
+  client.on("guildCreate", guild => {
+    console.log(`\nNEW SERVER!\n>> Server : ${guild.name}\n>> Members : ${guild.memberCount}\n`);
+    client.user.setActivity(`Listening to MurelianINC | w!help`);
+  });
+  
+  client.on("guildDelete", guild => {
+    console.log(`\nREMOVED SERVER!\n>> Server : ${guild.name}\n`);
+    client.user.setActivity(`Listening to MurelianINC | w!help`);
+  });
+  
+  client.on('guildMemberAdd', (guildMember) => {
+    guildMember.addRole(guildMember.guild.roles.find(role => role.name === "MEMBER"));
+  });
